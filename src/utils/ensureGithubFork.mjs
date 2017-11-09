@@ -2,10 +2,10 @@ async function getRepo(api, repo) {
   try {
     await api.repos.get({
       owner: process.env.GITHUB_USER,
-      repo: repo.name
+      repo: repo.name,
     });
     console.log(' - ok, found fork');
-  } catch(e) {
+  } catch (e) {
     console.log(' - repo not found, forking');
   }
 
@@ -14,12 +14,14 @@ async function getRepo(api, repo) {
       owner: repo.upstream,
       repo: repo.name,
     });
-  } catch(e) {
+  } catch (e) {
     console.warn(' - error forking repo');
   }
 }
 
-export default async function (api, repo) {
-  console.log(`Ensuring github fork for ${process.env.GITHUB_USER}/${repo.name}`);
+export default async function(api, repo) {
+  console.log(
+    `Ensuring github fork for ${process.env.GITHUB_USER}/${repo.name}`
+  );
   await getRepo(api, repo);
-};
+}
