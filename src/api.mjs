@@ -12,8 +12,8 @@ const github = new GitHubApi({
 if (process.env.GITHUB_TOKEN) {
   github.authenticate({
     type: 'token',
-    token: process.env.GITHUB_TOKEN
-  })
+    token: process.env.GITHUB_TOKEN,
+  });
 }
 
 export default github;

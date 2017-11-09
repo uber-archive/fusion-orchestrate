@@ -17,6 +17,6 @@
     "shelljs": "^0.7.8"
   },
   "scripts": {
-    "lint": "eslint . --ext mjs"
+    "lint": "eslint . --ext mjs --env node"
   }
 }
