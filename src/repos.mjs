@@ -103,10 +103,6 @@ const repos = [
     upstream: 'fusionjs',
     name: 'fusion-plugin-service-worker',
   },
-  {
-    upstream: 'fusionjs',
-    name: 'fusion-plugin-rpc-react',
-  },
 ];
 
 export default repos;
