@@ -6,9 +6,12 @@ Orchestrates running scripts across all fusion repositories.
 
 ## Scripts
 
-## src/setup.js
+### src/setup.js
+
+`node src/setup.js`
 
 Runs setup and cleans local folders.
+
 
 ## Usage
 
