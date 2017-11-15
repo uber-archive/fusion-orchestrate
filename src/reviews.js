@@ -1,5 +1,7 @@
 const getRepos = require('./repos');
 const api = require('./api');
+const chalk = require('chalk');
+const logPR = require('./utils/logPR');
 module.exports = async () => {
   const repos = await getRepos();
   let needsReview = await Promise.all(
@@ -41,13 +43,8 @@ module.exports = async () => {
       },
       {yours: [], others: []}
     );
-  console.log('\nNeeds your review:\n');
+  console.log(chalk.bold.underline.red('\nNeeds your review:\n'));
   others.forEach(logPR);
-  console.log('\nNeeds others review\n');
+  console.log(chalk.bold.underline.red('\nNeeds others review\n'));
   yours.forEach(logPR);
 };
-
-function logPR(p) {
-  console.log(p.title);
-  console.log(p.html_url);
-}
