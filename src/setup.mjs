@@ -1,3 +1,7 @@
+process.on('unhandledRejection', e => {
+  throw e;
+});
+
 import ensureGithubFork from './utils/ensureGithubFork.mjs';
 import ensureLocalCheckout from './utils/ensureLocalCheckout.mjs';
 import pause from './utils/pause.mjs';
