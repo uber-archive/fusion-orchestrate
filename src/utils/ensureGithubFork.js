@@ -19,9 +19,9 @@ async function getRepo(api, repo) {
   }
 }
 
-export default async function(api, repo) {
+module.exports = async function(api, repo) {
   console.log(
     `Ensuring github fork for ${process.env.GITHUB_USER}/${repo.name}`
   );
   await getRepo(api, repo);
-}
+};

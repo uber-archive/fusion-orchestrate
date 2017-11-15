@@ -1,8 +1,8 @@
-import shelljs from 'shelljs';
+const shelljs = require('shelljs');
 
 const repoParentFolder = process.cwd() + '/../';
 
-export default async function(api, repo, branchName) {
+module.exports = async function(api, repo, branchName) {
   console.log(`Making branch ${repo.name}/${branchName}.`);
   const repoFolder = `${repoParentFolder}${repo.name}`;
 
@@ -14,7 +14,7 @@ export default async function(api, repo, branchName) {
   const currBranchName = currentBranch.stdout.trim();
   console.log(' - branch name is: ', currBranchName);
   if (currBranchName !== 'master') {
-    throw new Error(`Branch for ${repo.name} is not master. Run setup.mjs.`);
+    throw new Error(`Branch for ${repo.name} is not master. Run setup.js.`);
   }
 
   // Create branch
@@ -25,4 +25,4 @@ export default async function(api, repo, branchName) {
   if (branchCreate.stderr) {
     console.warn(' - error creating branch', branchCreate.stderr);
   }
-}
+};

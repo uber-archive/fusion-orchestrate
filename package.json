@@ -2,9 +2,13 @@
   "name": "fusion-orchestrate",
   "version": "1.0.0",
   "description": "Automate repository commands and maintenance.",
-  "main": "index.js",
+  "main": "bin/cli.js",
+  "bin": {
+    "fusion-orchestrate": "bin/cli.js"
+  },
   "license": "MIT",
   "dependencies": {
+    "args": "^3.0.7",
     "babel-eslint": "^8.0.2",
     "eslint": "^4.11.0",
     "eslint-config-fusion": "^0.1.2",
@@ -18,6 +22,6 @@
     "shelljs": "^0.7.8"
   },
   "scripts": {
-    "lint": "eslint . --ext mjs --env node"
+    "lint": "eslint ."
   }
 }

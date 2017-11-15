@@ -1,8 +1,8 @@
-import shelljs from 'shelljs';
+const shelljs = require('shelljs');
 
 const repoParentFolder = process.cwd() + '/../';
 
-export default async function(api, repo) {
+module.exports = async function(api, repo) {
   console.log(`Resetting local changes for ${repo.name}.`);
   const repoFolder = `${repoParentFolder}${repo.name}`;
 
@@ -44,4 +44,4 @@ export default async function(api, repo) {
     git checkout master &&
     git pull upstream master
   `);
-}
+};
