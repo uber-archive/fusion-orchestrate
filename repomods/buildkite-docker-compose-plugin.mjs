@@ -1,11 +1,11 @@
-import fs from 'fs';
-import shelljs from 'shelljs';
-import yaml from 'js-yaml';
+const fs = require('fs');
+const shelljs = require('shelljs');
+const yaml = require('js-yaml');
 
-import makeBranch from './../src/utils/makeBranch.mjs';
-import makePullRequest from './../src/utils/makePullRequest.mjs';
-import pause from './../src/utils/pause.mjs';
-import withEachRepo from './../src/utils/withEachRepo.mjs';
+const makeBranch = require('./../src/utils/makeBranch.js');
+const makePullRequest = require('./../src/utils/makePullRequest.js');
+const pause = require('./../src/utils/pause.js');
+const withEachRepo = require('./../src/utils/withEachRepo.js');
 
 const COMPOSE_PLUGIN_VERSION = '1.7.0';
 

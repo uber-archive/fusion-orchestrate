@@ -1,9 +1,9 @@
-import fs from 'fs';
-import shelljs from 'shelljs';
+const fs = require('fs');
+const shelljs = require('shelljs');
 
 const repoParentFolder = process.cwd() + '/../';
 
-export default async function(api, repo) {
+module.exports = async function(api, repo) {
   console.log(`Ensuring local checkout for ${repo.name}.`);
   const repoFolder = repoParentFolder + repo.name;
   if (fs.existsSync(repoFolder)) {
@@ -16,4 +16,4 @@ export default async function(api, repo) {
       }/${repo.name}.git`
     );
   }
-}
+};

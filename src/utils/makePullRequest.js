@@ -1,4 +1,4 @@
-export default async function(api, repo, {title, originBranch}) {
+module.exports = async function(api, repo, {title, originBranch}) {
   console.log(`Making pull request from: ${originBranch}`);
   await api.pullRequests.create({
     owner: repo.upstream,
@@ -8,4 +8,4 @@ export default async function(api, repo, {title, originBranch}) {
     head: `${process.env.GITHUB_USER}:${originBranch}`,
     base: 'master',
   });
-}
+};

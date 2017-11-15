@@ -1,4 +1,4 @@
-import GitHubApi from 'github';
+const GitHubApi = require('github');
 
 const github = new GitHubApi({
   //debug: true,
@@ -16,4 +16,4 @@ if (process.env.GITHUB_TOKEN) {
   });
 }
 
-export default github;
+module.exports = github;

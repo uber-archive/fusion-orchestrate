@@ -4,16 +4,13 @@
 
 Orchestrates running scripts across all fusion repositories.
 
-## Scripts
+## Installation
 
-### src/setup.js
+```
+npm install -g fusion-orchestrate
+```
 
-`node src/setup.js`
-
-Runs setup and cleans local folders.
-
-
-## Usage
+## Setup
 
 Requires node 8.9.1 or above.
 
@@ -23,10 +20,22 @@ Update your ~/.bashrc || ~/.zshrc || ~/.fishrc
 ```bash
 export GITHUB_USER=______
 export GITHUB_TOKEN=_______
+```
 
-# NOTE replace the following aliases with whatever shortcuts you want
-alias forkall="node --experimental-modules ~/path/to/fusion-orchestrate/src/setup.mjs"
-alias myprs="node --experimental-modules ~/path/to/fusion-orchestrate/src/my-prs.mjs"
-alias reviews="node --experimental-modules ~/path/to/fusion-orchestrate/src/reviews.mjs"
-alias mergeaccepted="node --experimental-modules ~/path/to/fusion-orchestrate/src/merge-accepted.mjs"
+# Usage
+
+```
+Usage: fusion orchestrate [options] [command]
+
+Commands:
+
+  help           Display help
+  mergeAccepted  Merge all your accepted PRs
+  reviews        List all PRs needing review
+  setup          Fork and clone all the fusionjs repos
+
+Options:
+
+  -h, --help     Output usage information
+  -v, --version  Output the version number
 ```

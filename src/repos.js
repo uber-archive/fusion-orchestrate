@@ -1,6 +1,6 @@
-import api from './api';
+const api = require('./api');
 
-export default async function getRepos() {
+module.exports = async function getRepos() {
   const {data} = await api.repos.getForOrg({
     org: 'fusionjs',
   });
@@ -10,4 +10,4 @@ export default async function getRepos() {
       name: item.name,
     };
   });
-}
+};
