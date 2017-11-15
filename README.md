@@ -15,10 +15,18 @@ Runs setup and cleans local folders.
 
 ## Usage
 
-Requires node 9.1 or above.
+Requires node 8.9.1 or above.
 
 Generate a Github token at: https://github.com/settings/tokens/new
 
-```
-GITHUB_USER=______ GITHUB_TOKEN=_______ node --experimental-modules src/setup.mjs
+Update your ~/.bashrc || ~/.zshrc || ~/.fishrc
+```bash
+export GITHUB_USER=______
+export GITHUB_TOKEN=_______
+
+# NOTE replace the following aliases with whatever shortcuts you want
+alias forkall="node --experimental-modules ~/path/to/fusion-orchestrate/src/setup.mjs"
+alias myprs="node --experimental-modules ~/path/to/fusion-orchestrate/src/my-prs.mjs"
+alias reviews="node --experimental-modules ~/path/to/fusion-orchestrate/src/reviews.mjs"
+alias mergeaccepted="node --experimental-modules ~/path/to/fusion-orchestrate/src/merge-accepted.mjs"
 ```
