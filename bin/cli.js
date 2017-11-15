@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+process.on('unhandledRejection', e => {
+  throw e;
+});
 const args = require('args');
 const setup = require('../src/setup');
 const mergeAccepted = require('../src/merge-accepted');

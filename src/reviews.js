@@ -1,7 +1,3 @@
-process.on('unhandledRejection', e => {
-  throw e;
-});
-
 const getRepos = require('./repos');
 const api = require('./api');
 module.exports = async () => {

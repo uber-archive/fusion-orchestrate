@@ -1,7 +1,3 @@
-process.on('unhandledRejection', e => {
-  throw e;
-});
-
 const ensureGithubFork = require('./utils/ensureGithubFork.js');
 const ensureLocalCheckout = require('./utils/ensureLocalCheckout.js');
 const pause = require('./utils/pause.js');

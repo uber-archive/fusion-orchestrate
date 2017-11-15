@@ -1,7 +1,3 @@
-process.on('unhandledRejection', e => {
-  throw e;
-});
-
 const withEachRepo = require('./utils/withEachRepo.js');
 
 module.exports = () => {
