@@ -1,6 +1,9 @@
 const withEachRepo = require('./utils/withEachRepo.js');
+const logPR = require('./utils/logPR');
+const chalk = require('chalk');
 
 module.exports = () => {
+  console.log(chalk.bold.underline.red('\nMerging Pull Requests:\n'));
   withEachRepo(async (api, repo) => {
     const {data: pulls} = await api.pullRequests.getAll({
       owner: repo.upstream,
@@ -22,7 +25,7 @@ module.exports = () => {
         return r.state === 'APPROVED';
       });
       if (status.state === 'success' && hasStamp) {
-        console.log(`Adding merge comment to ${pull.html_url}`);
+        logPR(pull);
         await api.issues.createComment({
           owner: repo.upstream,
           repo: repo.name,

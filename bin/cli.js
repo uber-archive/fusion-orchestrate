@@ -12,5 +12,4 @@ args
   .command('mergeAccepted', 'Merge all your accepted PRs', mergeAccepted)
   .command('reviews', 'List all PRs needing review', reviews);
 
-const flags = args.parse(process.argv);
-console.log('flags', flags);
+args.parse(process.argv);
