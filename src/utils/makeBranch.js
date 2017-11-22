@@ -1,4 +1,5 @@
 const shelljs = require('shelljs');
+const assert = require('assert');
 
 const repoParentFolder = process.cwd() + '/../';
 
@@ -12,7 +13,7 @@ module.exports = async function(api, repo, branchName) {
     git rev-parse --abbrev-ref HEAD
   `);
   const currBranchName = currentBranch.stdout.trim();
-  console.log(' - branch name is: ', currBranchName);
+  console.log(' - Current branch name is:', currBranchName);
   if (currBranchName !== 'master') {
     throw new Error(`Branch for ${repo.name} is not master. Run setup.js.`);
   }
@@ -22,7 +23,9 @@ module.exports = async function(api, repo, branchName) {
     cd ${repoFolder} &&
     git checkout -b ${branchName}
   `);
-  if (branchCreate.stderr) {
-    console.warn(' - error creating branch', branchCreate.stderr);
-  }
+  assert(
+    branchCreate.code === 0,
+    ` - unable to create branch: ${branchCreate.stderr}`
+  );
+  console.log(' -', branchCreate.stderr);
 };
