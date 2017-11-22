@@ -93,10 +93,10 @@ withEachRepo(async (api, repo) => {
   `);
 
   // Open pull request
-  // await makePullRequest(api, repo, {
-  //   title: commitTitle,
-  //   originBranch,
-  // });
+  await makePullRequest(api, repo, {
+    title: commitTitle,
+    originBranch,
+  });
 
   await pause(200);
 });
