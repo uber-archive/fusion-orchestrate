@@ -7,7 +7,7 @@ module.exports = async function getRepos() {
   const {data} = await api.repos.getForOrg({
     org: 'fusionjs',
   });
-  return data.filter(item => !blacklist.includes(item)).map(item => {
+  return data.filter(item => !blacklist.includes(item.name)).map(item => {
     return {
       upstream: 'fusionjs',
       name: item.name,
