@@ -78,7 +78,7 @@ withEachRepo(async (api, repo) => {
   // Add flow dependency and initialize it
   shelljs.exec(`
     cd ${repoFolder} &&
-    yarn add --dev flow-bin &&
+    yarn add --dev flow-bin --registry https://registry.npmjs.org &&
     yarn run flow init`);
 
   // Add reasonable defaults to .flowconfig
