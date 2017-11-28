@@ -5,6 +5,7 @@ const assert = require('assert');
 
 const checkoutBranch = require('./../src/utils/branch/checkoutBranch.js');
 const fastForwardBranch = require('./../src/utils/branch/fastForwardBranch.js');
+const validateBranchWithUpstream = require('./../src/utils/branch/validateBranchWithUpstream');
 const deleteBranch = require('./../src/utils/branch/deleteBranch.js');
 const makeBranch = require('./../src/utils/branch/makeBranch.js');
 const makePullRequest = require('./../src/utils/makePullRequest.js');
@@ -28,11 +29,14 @@ withEachRepo(async (api, repo) => {
   // Fast forward master, if necessary
   fastForwardBranch(repo, 'master', verbose);
 
+  // Validate that master matches upstream/master
+  validateBranchWithUpstream(repo, 'master', verbose);
+
   // Delete branch, if exists
-  await deleteBranch(api, repo, originBranch, verbose);
+  deleteBranch(api, repo, originBranch, verbose);
 
   // Create the branch
-  await makeBranch(repo, originBranch, verbose);
+  makeBranch(repo, originBranch, verbose);
 
   // Parse pipeline yml
   let pipeline;
@@ -144,10 +148,23 @@ withEachRepo(async (api, repo) => {
 
   // Open pull request
   console.log('Making pull request.');
-  await makePullRequest(api, repo, {
-    title: commitTitle,
-    originBranch,
-  });
+  //  - Ensure changes between HEAD and upstream/master
+  const diffCount = shelljs.exec(
+    `
+    cd ${repoFolder} &&
+    git diff HEAD upstream/master | wc -l`,
+    {silent: !verbose}
+  );
+  if (!diffCount.stdout.trim().startsWith('0')) {
+    await makePullRequest(api, repo, {
+      title: commitTitle,
+      originBranch,
+    });
+  } else {
+    console.warn(
+      ' - No diff between HEAD and upstream/master.  Skipping pull request.'
+    );
+  }
 
   await pause(200);
 

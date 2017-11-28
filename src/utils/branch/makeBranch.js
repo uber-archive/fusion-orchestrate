@@ -3,7 +3,7 @@ const assert = require('assert');
 
 const repoParentFolder = process.cwd() + '/../';
 
-module.exports = async function(repo, branchName, verbose = true) {
+module.exports = function(repo, branchName, verbose = true) {
   console.log(`Making branch ${repo.name}/${branchName}.`);
   const repoFolder = `${repoParentFolder}${repo.name}`;
 

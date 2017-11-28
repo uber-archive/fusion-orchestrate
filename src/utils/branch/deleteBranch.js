@@ -60,7 +60,7 @@ const deleteRemoteBranch = function(repoFolder, branchName, verbose) {
   console.log(' - (remote)', branchDelete.stderr.trim().replace(/\n/g, '\\n'));
 };
 
-module.exports = async function(api, repo, branchName, verbose = false) {
+module.exports = function(api, repo, branchName, verbose = false) {
   console.log(`Deleting branch ${repo.name}/${branchName}.`);
   const repoFolder = `${repoParentFolder}${repo.name}`;
 
