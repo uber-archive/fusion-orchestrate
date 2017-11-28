@@ -3,12 +3,10 @@ const shelljs = require('shelljs');
 const yaml = require('js-yaml');
 const assert = require('assert');
 
-const {
-  checkout,
-  fastForward,
-  make,
-} = require('./../src/utils/branchHelpers.js');
-const deleteBranchIfExists = require('./../src/utils/deleteBranchIfExists');
+const checkoutBranch = require('./../src/utils/branch/checkoutBranch.js');
+const fastForwardBranch = require('./../src/utils/branch/fastForwardBranch.js');
+const deleteBranch = require('./../src/utils/branch/deleteBranch.js');
+const makeBranch = require('./../src/utils/branch/makeBranch.js');
 const makePullRequest = require('./../src/utils/makePullRequest.js');
 const pause = require('./../src/utils/pause.js');
 const withEachRepo = require('./../src/utils/withEachRepo.js');
@@ -25,16 +23,16 @@ withEachRepo(async (api, repo) => {
   console.log(`Adding Flow to repo: ${repo.name}.`);
 
   // Checkout master
-  checkout(repo, 'master', verbose);
+  checkoutBranch(repo, 'master', verbose);
 
   // Fast forward master, if necessary
-  fastForward(repo, 'master', verbose);
+  fastForwardBranch(repo, 'master', verbose);
 
   // Delete branch, if exists
-  await deleteBranchIfExists(api, repo, originBranch, verbose);
+  await deleteBranch(api, repo, originBranch, verbose);
 
   // Create the branch
-  await make(repo, originBranch, verbose);
+  await makeBranch(repo, originBranch, verbose);
 
   // Parse pipeline yml
   let pipeline;

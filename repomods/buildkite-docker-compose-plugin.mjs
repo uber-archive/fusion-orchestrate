@@ -2,7 +2,7 @@ const fs = require('fs');
 const shelljs = require('shelljs');
 const yaml = require('js-yaml');
 
-const makeBranch = require('./../src/utils/makeBranch.js');
+const makeBranch = require('./../src/utils/branch/makeBranch.js');
 const makePullRequest = require('./../src/utils/makePullRequest.js');
 const pause = require('./../src/utils/pause.js');
 const withEachRepo = require('./../src/utils/withEachRepo.js');
@@ -17,7 +17,7 @@ const commitTitle = `Upgrade docker-compose plugin to v${
 
 withEachRepo(async (api, repo) => {
   // Create the branch
-  await makeBranch(api, repo, originBranch);
+  await makeBranch(repo, originBranch);
 
   // Parse pipeline yml
   const repoFolder = `${repoParentFolder}${repo.name}`;
