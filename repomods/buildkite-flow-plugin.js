@@ -12,16 +12,51 @@ const makePullRequest = require('./../src/utils/makePullRequest.js');
 const pause = require('./../src/utils/pause.js');
 const withEachRepo = require('./../src/utils/withEachRepo.js');
 const copyFile = require('./../src/utils/copyFile.js');
+const getOpenReviews = require('./../src/utils/getOpenReviews.js');
 
 const repoParentFolder = process.cwd() + '/../';
 const originBranch = 'orchestrate-buildkite-flow-plugin';
 const commitTitle = 'Add Flow step to pipeline.yml';
+const username = process.env.GITHUB_USER;
 
+// TODO Web Platform 2017-11-28 - Move this into a separate file
+/* Config */
 const verbose = false;
+
+/* Helper functions */
+// Gets all open pull requests originating from user's fork to fusionjs repo with this commit title.
+const getExistingReviews = async repo =>
+  (await getOpenReviews()).filter(
+    review =>
+      review.title === commitTitle &&
+      review.user.login.toLowerCase() === username.toLowerCase() &&
+      review.head.label.toLowerCase() ===
+        `${username}:${originBranch}`.toLowerCase() &&
+      review.head.repo.full_name.toLowerCase() ===
+        `${username}/${repo.name}`.toLowerCase() &&
+      review.base.label.toLowerCase() === 'fusionjs:master' &&
+      review.base.repo.full_name.toLowerCase() ===
+        `${repo.upstream}/${repo.name}`.toLowerCase()
+  );
 
 withEachRepo(async (api, repo) => {
   const repoFolder = `${repoParentFolder}${repo.name}`;
   console.log(`Adding Flow to repo: ${repo.name}.`);
+
+  // Determine if an existing pull request already exists
+  const existingReviews = await getExistingReviews(repo);
+  if (existingReviews.length > 0) {
+    console.warn(
+      ` - At least one existing pull request is still open.  Please close all before attempting to make a new one.  Skipping pull request`
+    );
+    existingReviews.forEach(review => {
+      console.log(`   - ${review.url}`);
+    });
+
+    console.log('Complete.');
+    console.log('========================================');
+    return;
+  }
 
   // Checkout master
   checkoutBranch(repo, 'master', verbose);
@@ -136,7 +171,7 @@ withEachRepo(async (api, repo) => {
   await copyFile('./repomods/assets/.flowconfig', `${repoFolder}/.flowconfig`);
 
   // Commit changes & push
-  console.log(`Committing changes and pushing to remote ${originBranch}.`);
+  console.log(`Committing changes and pushing to origin/${originBranch}.`);
   shelljs.exec(
     `
     cd ${repoFolder} &&
@@ -147,14 +182,17 @@ withEachRepo(async (api, repo) => {
   );
 
   // Open pull request
-  console.log('Making pull request.');
+  console.log(
+    `Making pull request to merge into ${repo.upstream}/${repo.name}.`
+  );
   //  - Ensure changes between HEAD and upstream/master
   const diffCount = shelljs.exec(
     `
     cd ${repoFolder} &&
-    git diff HEAD upstream/master | wc -l`,
+    git diff upstream/master HEAD | wc -l`,
     {silent: !verbose}
   );
+
   if (!diffCount.stdout.trim().startsWith('0')) {
     await makePullRequest(api, repo, {
       title: commitTitle,

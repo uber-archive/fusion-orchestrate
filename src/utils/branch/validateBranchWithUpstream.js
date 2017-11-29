@@ -15,8 +15,6 @@ module.exports = function(repo, branchName, verbose) {
   );
   assert(
     diffCount.stdout.trim().startsWith('0'),
-    `Current HEAD differs from upstream/${
-      branchName
-    }.  Try running 'fusion-orchestrate setup' to resolve this.`
+    `Current HEAD differs from upstream/${branchName}.`
   );
 };
