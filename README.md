@@ -25,7 +25,7 @@ export GITHUB_TOKEN=_______
 # Usage
 
 ```
-Usage: fusion orchestrate [options] [command]
+Usage: fusion-orchestrate [options] [command]
 
 Commands:
 
