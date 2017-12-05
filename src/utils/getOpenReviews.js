@@ -17,7 +17,10 @@ module.exports = async () => {
             repo: repo.name,
             number: pull.number,
           });
-          if (reviews.length === 0) {
+          const acceptedReviews = reviews.filter(
+            review => review.state === 'APPROVED'
+          );
+          if (acceptedReviews.length === 0) {
             return pull;
           } else {
             return null;
