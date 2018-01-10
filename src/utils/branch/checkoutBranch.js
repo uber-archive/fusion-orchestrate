@@ -10,7 +10,7 @@ module.exports = function(repo, branchName, verbose) {
   const checkout = shelljs.exec(
     `
       cd ${repoFolder} &&
-      git co ${branchName}
+      git checkout ${branchName}
     `,
     {silent: !verbose}
   );
