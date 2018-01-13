@@ -1,20 +1,23 @@
 const api = require('./api');
 
 /* blacklist of repositories to not include */
-const blacklist = [
-  'rfcs',
-  'probot-app-workflow',
-  'fusion-plugin-service-worker',
-];
+const blacklist = ['rfcs'];
 
-module.exports = async function getRepos() {
+const getForOrg = async org => {
   const {data} = await api.repos.getForOrg({
-    org: 'fusionjs',
+    org: org,
   });
   return data.filter(item => !blacklist.includes(item.name)).map(item => {
     return {
-      upstream: 'fusionjs',
+      upstream: org,
       name: item.name,
     };
   });
+};
+
+module.exports = async function getRepos() {
+  return [
+    ...(await getForOrg('fusionjs')),
+    ...(await getForOrg('uber-workflow')),
+  ];
 };
