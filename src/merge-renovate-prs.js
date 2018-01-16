@@ -11,9 +11,12 @@ module.exports = () => {
       state: 'open',
     });
 
+    // Only merge a single PR at a time due to renovate rebasing all PRs.
+    let mergedOnePr = false;
+
     for (let i = 0; i < pulls.length; i++) {
       const pull = pulls[i];
-      if (pull.user.login !== 'renovate[bot]') {
+      if (pull.user.login !== 'renovate[bot]' || mergedOnePr) {
         continue;
       }
 
@@ -44,6 +47,8 @@ module.exports = () => {
         number: pull.number,
         body: '!merge',
       });
+
+      mergedOnePr = true;
     }
 
     await pause(200);
