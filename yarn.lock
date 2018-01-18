@@ -1368,7 +1368,7 @@ glob-parent@^2.0.0:
   dependencies:
     is-glob "^2.0.0"
 
-glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.2:
+glob@7.1.2, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
   dependencies:
@@ -1646,7 +1646,7 @@ js-yaml@^3.10.0, js-yaml@^3.9.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-jscodeshift@^0.4.0:
+jscodeshift@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/jscodeshift/-/jscodeshift-0.4.0.tgz#a76afdbfc6f4e78c3fd0d1a60470dfa43c03190e"
   dependencies:
@@ -2072,7 +2072,7 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-refactoring-codemods@^0.3.2:
+refactoring-codemods@0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/refactoring-codemods/-/refactoring-codemods-0.3.2.tgz#a5d399d2dadcd4dceae9e679d68e3ec2f84ed2cd"
 
