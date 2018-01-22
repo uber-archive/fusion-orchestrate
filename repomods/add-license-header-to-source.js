@@ -79,15 +79,18 @@ withEachRepo(async (api, repo) => {
   } catch (e) {
     console.log('Skipping repo: ', repo.name);
     console.log('========================================');
-    console.log(e);
     return;
   }
 
   // Prepend the license header to the top of each eligible file
+  console.log('Adding license header to source files.');
+  let hasShortHeaderForAllFiles = true; // all files already have short header
   filePaths.filter(p => p.endsWith('.js')).forEach(p => {
     let body = fs.readFileSync(p, {encoding: 'utf8'});
     if (body.startsWith(licenseText)) {
       return; // header already exists
+    } else {
+      hasShortHeaderForAllFiles = false;
     }
 
     // Edge case: if the long form header exists, remove it
@@ -97,6 +100,13 @@ withEachRepo(async (api, repo) => {
 
     fs.writeFileSync(p, `${licenseText}${body}`, {encoding: 'utf8'});
   });
+
+  if (hasShortHeaderForAllFiles) {
+    console.log(` - All source files already have license header`);
+    console.log('Complete.');
+    console.log('========================================');
+    return;
+  }
 
   // Commit changes & push
   shelljs.exec(`
