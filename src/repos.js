@@ -19,7 +19,6 @@ const getForOrg = async org => {
   }
 
   const data = [].concat.apply([], results);
-  console.log(data.map(d => d.name));
   return data.filter(item => !blacklist.includes(item.name)).map(item => {
     return {
       upstream: org,
