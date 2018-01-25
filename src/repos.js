@@ -4,9 +4,22 @@ const api = require('./api');
 const blacklist = ['rfcs'];
 
 const getForOrg = async org => {
-  const {data} = await api.repos.getForOrg({
-    org: org,
-  });
+  let pageNum = 1;
+  let results = [];
+  let isEmpty = false;
+  while (!isEmpty) {
+    const {data} = await api.repos.getForOrg({
+      org: org,
+      page: pageNum,
+    });
+    results.push(data);
+
+    pageNum++;
+    isEmpty = data.length === 0;
+  }
+
+  const data = [].concat.apply([], results);
+  console.log(data.map(d => d.name));
   return data.filter(item => !blacklist.includes(item.name)).map(item => {
     return {
       upstream: org,
