@@ -9,7 +9,7 @@ module.exports = async function(api, repo) {
   // Set remotes
   const originRemote = shelljs.exec(`
     cd ${repoFolder} &&
-    git remote set-url origin git@github.com:${process.env.GITHUB_USER}/${
+    git remote set-url fork git@github.com:${process.env.GITHUB_USER}/${
     repo.name
   }.git
   `);
@@ -17,8 +17,8 @@ module.exports = async function(api, repo) {
     console.warn(' - error setting origin remote, resetting it');
     shelljs.exec(`
       cd ${repoFolder} &&
-      (git remote rm origin || true) &&
-      git remote add origin git@github.com:${process.env.GITHUB_USER}/${
+      (git remote rm fork || true) &&
+      git remote add fork git@github.com:${process.env.GITHUB_USER}/${
       repo.name
     }.git
     `);
@@ -26,14 +26,14 @@ module.exports = async function(api, repo) {
 
   const upstreamRemote = shelljs.exec(`
     cd ${repoFolder} &&
-    git remote set-url upstream git@github.com:${repo.upstream}/${repo.name}.git
+    git remote set-url origin git@github.com:${repo.upstream}/${repo.name}.git
   `);
   if (upstreamRemote.stderr) {
     console.warn(' - error setting upstream remote, resetting it');
     shelljs.exec(`
       cd ${repoFolder} &&
-      (git remote rm upstream || true) &&
-      git remote add upstream git@github.com:${repo.upstream}/${repo.name}.git
+      (git remote rm origin || true) &&
+      git remote add origin git@github.com:${repo.upstream}/${repo.name}.git
     `);
   }
 
@@ -42,6 +42,6 @@ module.exports = async function(api, repo) {
     cd ${repoFolder} &&
     git reset --hard HEAD &&
     git checkout master &&
-    git pull upstream master
+    git pull origin master
   `);
 };

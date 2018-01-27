@@ -8,13 +8,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "args": "^3.0.7",
+    "args": "^3.0.8",
     "chalk": "^2.3.0",
-    "eslint": "^4.11.0",
-    "github": "^13.0.0",
+    "eslint": "^4.16.0",
+    "github": "^13.1.0",
     "js-yaml": "^3.10.0",
-    "prettier": "^1.8.2",
-    "shelljs": "^0.8.0"
+    "prettier": "^1.10.2",
+    "shelljs": "^0.8.1"
   },
   "scripts": {
     "lint": "eslint ."
@@ -23,10 +23,10 @@
     "babel-eslint": "8.2.1",
     "eslint-config-fusion": "0.2.1",
     "eslint-plugin-cup": "1.0.0",
-    "eslint-plugin-flowtype": "2.41.1",
+    "eslint-plugin-flowtype": "2.42.0",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-prettier": "2.5.0",
-    "eslint-plugin-react": "7.5.1",
+    "eslint-plugin-react": "7.6.0",
     "glob": "7.1.2",
     "jscodeshift": "0.4.0",
     "refactoring-codemods": "0.3.2"
