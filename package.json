@@ -8,13 +8,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "args": "^3.0.7",
+    "args": "^3.0.8",
     "chalk": "^2.3.0",
-    "eslint": "^4.11.0",
-    "github": "^13.0.0",
+    "eslint": "^4.16.0",
+    "github": "^13.1.0",
     "js-yaml": "^3.10.0",
-    "prettier": "^1.8.2",
-    "shelljs": "^0.8.0"
+    "prettier": "^1.10.2",
+    "shelljs": "^0.8.1"
   },
   "scripts": {
     "lint": "eslint ."
