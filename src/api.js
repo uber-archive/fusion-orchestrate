@@ -5,7 +5,6 @@ const github = new GitHubApi({
   timeout: 5000,
   host: 'api.github.com',
   protocol: 'https',
-  followRedirects: true,
   rejectUnauthorized: false,
 });
 
