@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "babel-eslint": "8.2.1",
-    "eslint-config-fusion": "0.2.1",
+    "eslint-config-fusion": "1.0.0",
     "eslint-plugin-cup": "1.0.0",
     "eslint-plugin-flowtype": "2.42.0",
     "eslint-plugin-import": "2.8.0",
