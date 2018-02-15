@@ -1,7 +1,7 @@
 const api = require('./api');
 
 /* blacklist of repositories to not include */
-const blacklist = ['rfcs'];
+const blacklist = ['rfcs', 'fusionjs.github.io'];
 
 const getForOrg = async org => {
   let pageNum = 1;
