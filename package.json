@@ -1,6 +1,6 @@
 {
   "name": "fusion-orchestrate",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Automate repository commands and maintenance.",
   "main": "bin/cli.js",
   "bin": {
