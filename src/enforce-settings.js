@@ -26,7 +26,7 @@ module.exports = () => {
       enforce_admins: false,
       required_status_checks: {
         strict: false,
-        contexts: [`buildkite/${repo.name}`],
+        contexts: [`buildkite/${repo.name}`, 'probot/release-verification'],
       },
       required_pull_request_reviews: {
         include_admins: true,
