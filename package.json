@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "args": "^3.0.7",
+    "args": "^4.0.0",
     "chalk": "^2.3.0",
     "eslint": "^4.11.0",
     "github": "^13.0.0",
