@@ -29,6 +29,6 @@
     "eslint-plugin-react": "7.7.0",
     "glob": "7.1.2",
     "jscodeshift": "0.5.0",
-    "refactoring-codemods": "0.3.2"
+    "refactoring-codemods": "0.3.4"
   }
 }
