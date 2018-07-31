@@ -1,7 +1,14 @@
 const api = require('./api');
 
 /* blacklist of repositories to not include */
-const blacklist = ['rfcs', 'fusionjs.github.io'];
+const blacklist = [
+  // Blacklisted because of no tests, or code.
+  'rfcs',
+  // Blacklisted due to package deprecation
+  'fusion-react-async',
+  // Docs site, may want to unblacklist.
+  'fusionjs.github.io',
+];
 
 const getForOrg = async org => {
   let pageNum = 1;
