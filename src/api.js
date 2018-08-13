@@ -1,11 +1,8 @@
-const GitHubApi = require('github');
+const GitHubApi = require('@octokit/rest');
 
 const github = new GitHubApi({
-  //debug: true,
+  debug: true,
   timeout: 5000,
-  host: 'api.github.com',
-  protocol: 'https',
-  rejectUnauthorized: false,
 });
 
 if (process.env.GITHUB_TOKEN) {
