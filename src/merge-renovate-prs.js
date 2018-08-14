@@ -29,6 +29,13 @@ module.exports = () => {
         ref: pull.head.sha,
       });
 
+      await api.issues.addLabels({
+        owner: repo.upstream,
+        repo: repo.name,
+        number: pull.number,
+        labels: ['greenkeeping'],
+      });
+
       if (status.state !== 'success') {
         console.log(chalk.bold('failing tests, skipping'));
         continue;
