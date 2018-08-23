@@ -4,6 +4,7 @@ process.on('unhandledRejection', e => {
 });
 const args = require('args');
 const setup = require('../src/setup');
+const listRepos = require('../src/listRepos');
 const enforceSettings = require('../src/enforce-settings');
 const mergeAccepted = require('../src/merge-accepted');
 const mergeRenovate = require('../src/merge-renovate-prs');
@@ -11,6 +12,7 @@ const reviews = require('../src/reviews');
 
 args
   .command('setup', 'Fork and clone all the fusionjs repos', setup)
+  .command('listRepos', 'Lists all repos', listRepos)
   .command(
     'enforceSettings',
     'Enforces Github settings across all repositories',
