@@ -9,7 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "@octokit/rest": "^15.9.5",
-    "args": "^4.0.0",
+    "args": "^5.0.0",
     "chalk": "^2.3.0",
     "eslint": "^4.11.0",
     "js-yaml": "^3.10.0",
