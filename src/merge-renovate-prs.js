@@ -61,7 +61,11 @@ module.exports = () => {
         );
       }
 
-      if (status.state !== 'success') {
+      const buildkiteStatuses = status.statuses.filter(
+        val =>
+          val.context === `buildkite/${repo.name}` && val.state === 'success'
+      );
+      if (buildkiteStatuses.length < 1) {
         console.log(chalk.bold('failing tests, skipping'));
         continue;
       }
