@@ -29,14 +29,43 @@ module.exports = () => {
         ref: pull.head.sha,
       });
 
-      await api.issues.addLabels({
-        owner: repo.upstream,
-        repo: repo.name,
-        number: pull.number,
-        labels: ['greenkeeping'],
-      });
+      // Add the `CI` label for ci-gate where necessary
+      if (
+        status.statuses.some(
+          val => val.context === 'ci-gate' && val.state === 'pending'
+        )
+      ) {
+        await api.issues.addLabels({
+          owner: repo.upstream,
+          repo: repo.name,
+          number: pull.number,
+          labels: ['ci'],
+        });
+        console.log('adding CI tag to pull request for pending ci-gate');
+      }
 
-      if (status.state !== 'success') {
+      // Add greenkeeping label if necessary
+      if (
+        status.statuses.some(
+          val => val.context === 'probot/pr-label' && val.state !== 'success'
+        )
+      ) {
+        await api.issues.addLabels({
+          owner: repo.upstream,
+          repo: repo.name,
+          number: pull.number,
+          labels: ['greenkeeping'],
+        });
+        console.log(
+          'adding greenkeeping tag to pull request for failed probot/pr-label'
+        );
+      }
+
+      const buildkiteStatuses = status.statuses.filter(
+        val =>
+          val.context === `buildkite/${repo.name}` && val.state === 'success'
+      );
+      if (buildkiteStatuses.length < 1) {
         console.log(chalk.bold('failing tests, skipping'));
         continue;
       }
