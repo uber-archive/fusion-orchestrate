@@ -4,6 +4,7 @@ const api = require('./api');
 const blacklist = [
   // Blacklisted because of no tests, or code.
   'rfcs',
+  'fusion-plugin-introspect',
   // Blacklisted due to package deprecation
   'fusion-react-async',
   // Docs site, may want to unblacklist.
