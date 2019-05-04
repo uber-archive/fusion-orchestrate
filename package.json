@@ -28,7 +28,7 @@
     "eslint-plugin-prettier": "2.6.2",
     "eslint-plugin-react": "7.12.4",
     "glob": "7.1.3",
-    "jscodeshift": "0.6.2",
+    "jscodeshift": "0.6.4",
     "refactoring-codemods": "0.3.4"
   }
 }
